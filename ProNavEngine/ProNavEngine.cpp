@@ -1,6 +1,5 @@
 #include <cmath>
 
-//command to export the function to DLL
 #define EXPORT extern "C" __declspec(dllexport)
 
 EXPORT double CalculateNewHeading(double targetX, double targetY,
