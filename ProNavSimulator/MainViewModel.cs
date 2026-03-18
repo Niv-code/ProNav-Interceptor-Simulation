@@ -17,15 +17,13 @@ namespace ProNavSimulator
             double previousLosAngle, out double outNewLosAngle);
 
         private DispatcherTimer _timer;
-
-        // control parameters
+        
         private double _navConstant = 4.0;
         public double NavigationConstant { get => _navConstant; set { _navConstant = value; OnPropertyChanged(); } }
 
         private double _targetManeuver = 5.0;
         public double TargetManeuverIntensity { get => _targetManeuver; set { _targetManeuver = value; OnPropertyChanged(); } }
 
-        // telemetry stats
         public double TargetX { get; private set; }
         public double TargetY { get; private set; }
         public double MissileX { get; private set; }
@@ -96,13 +94,11 @@ namespace ProNavSimulator
                 _previousLosAngle = Math.Atan2(TargetY - MissileY, TargetX - MissileX);
                 _isFirstTick = false;
             }
-
-            // update missile position based on new heading
+            
             MissileX += MissileSpeed * Math.Cos(_missileHeadingRads);
             MissileY += MissileSpeed * Math.Sin(_missileHeadingRads);
             MissileHeadingDegrees = _missileHeadingRads * (180.0 / Math.PI);
 
-            // refresh the screen
             OnPropertyChanged(nameof(TargetX)); OnPropertyChanged(nameof(TargetY));
             OnPropertyChanged(nameof(MissileX)); OnPropertyChanged(nameof(MissileY));
             OnPropertyChanged(nameof(MissileHeadingDegrees));
